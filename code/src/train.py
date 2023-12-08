@@ -26,6 +26,9 @@ from lib.utils import load_models_opt,save_models_opt,save_models,load_npz,param
 from lib.perpare import prepare_dataloaders,prepare_models
 from lib.modules import sample_one_batch as sample, test as test, train as train
 from lib.datasets import get_fix_data
+from PIL import ImageFile
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
 def parse_args():
@@ -55,8 +58,9 @@ def parse_args():
                         help='if use multi-gpu')
     parser.add_argument('--gpu_id', type=int, default=1,
                         help='gpu id')
-    parser.add_argument('--local_rank', default=-1, type=int,
+    parser.add_argument('--local-rank', default=0, type=int,
                         help='node rank for distributed training')
+
     parser.add_argument('--random_sample', action='store_true',default=True, 
                         help='whether to sample the dataset with random sampler')
     args = parser.parse_args()
@@ -88,6 +92,9 @@ def main(args):
     print('**************G_paras: ',params_count(netG))
     print('**************D_paras: ',params_count(netD)+params_count(netC))
     fixed_img, fixed_sent, fixed_words, fixed_z = get_fix_data(train_dl, valid_dl, text_encoder, args)
+    #print("fixed_img:"+fixed_img+" fixed_sent:"+fixed_sent+" fixed_words:"+ fixed_words+" fixed_z:"+fixed_z)
+    print("fixed_img:" + str(fixed_img) + " fixed_sent:" + str(fixed_sent) + " fixed_words:" + str(fixed_words) + " fixed_z:" + str(fixed_z))
+
     if (args.multi_gpus==True) and (get_rank() != 0):
         None
     else:
