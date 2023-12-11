@@ -52,7 +52,7 @@ Install [CLIP](https://github.com/openai/CLIP)
   cd GALIP/code/
   ```
 ### Train the GALIP model
-  - For bird dataset: `bash scripts/train.sh ./cfg/bird.yml`
+  - For bird dataset: `bash scripts/train.sh ./cfg/birds.yml`
   - For coco dataset: `bash scripts/train.sh ./cfg/coco.yml`
 ### Resume training process
 If your training process is interrupted unexpectedly, set **state_epoch**, **log_dir**, and **pretrained_model_path** in train.sh to resume training.
@@ -76,7 +76,7 @@ Our code supports automate FID evaluation during training, the results are store
   cd GALIP/code/
   ```
 set **pretrained_model** in test.sh
-- For bird dataset: `bash scripts/test.sh ./cfg/bird.yml`
+- For bird dataset: `bash scripts/test.sh ./cfg/birds.yml`
 - For COCO dataset: `bash scripts/test.sh ./cfg/coco.yml`
 - For CC12M (zero-shot on COCO) dataset: `bash scripts/test.sh ./cfg/coco.yml`
 
